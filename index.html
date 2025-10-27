@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Turkishexotic.cars — Neon Spotter</title>
+  <meta name="description" content="TurkishExotic.Cars — Gece spotter enerjisi: story + teknik bilgi + owner + hashtag."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#07080c; --panel:#0e1018; --ink:#cdd3ff; --muted:#8a90b2;
+      --neon1:#0ff; --neon2:#8a2be2; --neon3:#ff2d55; --neon4:#39ff14;
+      --ring:rgba(144,238,255,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:
+      radial-gradient(900px 600px at 90% -10%, rgba(255,45,85,.08), transparent 60%),
+      radial-gradient(900px 600px at 10% 110%, rgba(57,255,20,.06), transparent 60%),
+      linear-gradient(180deg,#05060a,#0a0b12 48%,#05060a);
+      color:var(--ink);font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+    a{color:inherit;text-decoration:none}
+
+    /* header */
+    header{position:sticky;top:0;z-index:10;background:rgba(8,10,16,.55);backdrop-filter:blur(10px) saturate(140%);border-bottom:1px solid rgba(255,255,255,.06)}
+    .wrap{max-width:1240px;margin:0 auto;padding:0 18px}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px}
+    .spark{width:14px;height:14px;border-radius:4px;background:conic-gradient(from 0deg, var(--neon1),var(--neon2),var(--neon3),var(--neon4),var(--neon1));filter:drop-shadow(0 0 10px #7df)}
+    h1{margin:0;font-size:18px;font-weight:800;letter-spacing:.3px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,#0c0f18,#0a0c14)}
+
+    /* hero */
+    .hero{padding:42px 0 22px}
+    .cardHero{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:stretch}
+    .cover{position:relative;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.08);min-height:360px;background:url('https://images.unsplash.com/photo-1554825203-68321dd3fd2a?q=80&w=1600&auto=format&fit=crop') center/cover}
+    .cover:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,8,12,.6),transparent 60%)}
+    .pane{position:relative;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,#0b0e17,#090b13);padding:22px}
+    .kicker{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;border:1px dashed rgba(144,238,255,.25);color:var(--muted);font-size:12px}
+    .title{font-size:36px;margin:14px 0 8px;line-height:1.1;font-weight:800}
+    .subtitle{color:var(--muted)}
+    .cta{display:flex;gap:10px;margin-top:16px}
+
+    /* grid */
+    .section{padding:10px 0 38px}
+    .section h2{font-size:22px;margin:0 0 12px 6px;color:#e6ecff}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;position:relative}
+    .thumb{aspect-ratio:16/10;background:#090b12 center/cover no-repeat}
+    .halo{position:absolute;inset:auto 0 0 0;height:2px;background:linear-gradient(90deg,transparent,var(--neon2),var(--neon1),transparent);opacity:.6}
+    .body{padding:12px 14px}
+    .tag{font-size:12px;color:var(--muted)}
+    .name{margin:2px 0 6px;font-weight:700}
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+    .pill{font-size:12px;color:#bfe1ff;border:1px solid rgba(144,238,255,.25);padding:6px 8px;border-radius:999px;background:rgba(15,22,28,.6)}
+    .open{margin-top:10px;display:inline-flex;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,#0e111a,#0a0c14)}
+
+    /* modal */
+    dialog{border:none;border-radius:18px;max-width:min(920px,96vw);background:#0b0d14;color:var(--ink)}
+    dialog::backdrop{background:rgba(0,0,10,.65)}
+    .detail{display:grid;grid-template-columns:1.25fr 1fr}
+    .big{min-height:420px;background:#090b12 center/cover no-repeat;border-right:1px solid rgba(255,255,255,.06)}
+    .pad{padding:16px 18px}
+    .muted{color:var(--muted)}
+    .specs{margin:10px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .spec{background:#0f121c;border:1px solid rgba(144,238,255,.2);border-radius:10px;padding:10px}
+    .spec b{display:block;font-size:12px;color:#9fc7ff;margin-bottom:4px}
+    .close{position:absolute;top:10px;right:10px}
+
+    footer{border-top:1px solid rgba(255,255,255,.06);padding:24px 0;color:#9aa3c2}
+
+    @media (max-width:1024px){.cardHero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}.title{font-size:28px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand"><span class="spark"></span><h1>Turkishexotic.cars</h1></div>
+      <nav>
+        <a class="btn" href="#spots">Son spotlar</a>
+        <a class="btn" href="mailto:submit@turkishexoticar.info">Gönder • submit@turkishexoticar.info</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="cardHero">
+        <div class="cover" role="img" aria-label="gece spotter"></div>
+        <div class="pane">
+          <span class="kicker">gece • pist • garaj</span>
+          <div class="title">Türkiye'nin <span style="color:var(--neon1);text-shadow:0 0 12px #0ff8">neon spotter</span> akımı</div>
+          <p class="subtitle">Her post: <b>story</b> • <b>teknik bilgi</b> • <b>owner</b> • <b>hashtag</b>. Brabus & Mansory'de kısa hikâye şart.</p>
+          <div class="cta">
+            <a class="btn" href="#spots">Son spotları gör</a>
+            <a class="btn" href="mailto:submit@turkishexoticar.info">Foto/Video gönder</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="spots" class="section">
+      <h2>Son spotlar</h2>
+      <div class="grid" id="grid"></div>
+    </section>
+  </main>
+
+  <dialog id="dlg">
+    <button class="btn close" onclick="dlg.close()">✕</button>
+    <div class="detail">
+      <div class="big" id="big"></div>
+      <div class="pad">
+        <h3 id="dTitle">Araç</h3>
+        <p class="muted" id="dStory">Story</p>
+        <div class="specs" id="specs"></div>
+        <p class="muted">Owner: <span id="dOwner">—</span></p>
+        <small class="muted" id="dTags"></small>
+      </div>
+    </div>
+  </dialog>
+
+  <footer>
+    <div class="wrap">© <span id="y"></span> Turkishexotic.cars • “See it — Spot it — Share it” • <a href="mailto:submit@turkishexoticar.info">submit@turkishexoticar.info</a></div>
+  </footer>
+
+  <script>
+    const spots=[
+      {title:"Lamborghini Huracán EVO", tag:"V10 • AWD", img:"https://images.unsplash.com/photo-1590362891991-f776e747a588?q=80&w=1600&auto=format&fit=crop", story:"Bir motor sesi düşün, kalabalığın üstünden geçip kalbine dokunsun. V10'un her çığlığı İtalyan tutkusunun yankısı.", specs:[["Motor","5.2L NA V10"],["Güç","640 hp"],["0–100","2.9 sn"],["Maks. hız","325 km/s"]], owner:"—", tags:"#HuracanEvo #V10Power #CarSpottingTurkey"},
+      {title:"Ferrari F430 F1", tag:"V8 • RWD", img:"https://images.unsplash.com/photo-1623654021975-4374debe3936?q=80&w=1600&auto=format&fit=crop", story:"Gaz sabit, tünel açık. F1 klikleri şehrin ritmine karışıyor.", specs:[["Motor","4.3L NA V8"],["Güç","490 hp"],["0–100","3.9 sn"],["Şanzıman","F1 6 ileri"]], owner:"—", tags:"#FerrariF430 #V8 #FastestMeet"},
+      {title:"Mercedes‑AMG GT S", tag:"V8 Biturbo", img:"https://images.unsplash.com/photo-1483721310020-03333e577078?q=80&w=1600&auto=format&fit=crop", story:"Uzun kaput, kısa arka; Alman kas, tam doz tork.", specs:[["Motor","4.0L V8 BT"],["Güç","522 hp"],["0–100","3.8 sn"],["Aktarma","RWD"]], owner:"—", tags:"#AMG #GTS #TwinTurboV8"},
+      {title:"Porsche 911 GT3 RS (992)", tag:"NA • Track", img:"https://images.unsplash.com/photo-1625959277945-2f4d9c650327?q=80&w=1600&auto=format&fit=crop", story:"9000 rpm çığlığı; aero her dönüşte yeni bir tur daha ister.", specs:[["Motor","4.0L NA F6"],["Güç","525 hp"],["Şanzıman","PDK"],["Aero","Aktif kanat"]], owner:"—", tags:"#GT3RS #992 #Porsche"},
+      {title:"Lamborghini Aventador LP700‑4", tag:"V12 • AWD", img:"https://images.unsplash.com/photo-1523985301216-c28661a4ea9f?q=80&w=1600&auto=format&fit=crop", story:"Kapak açılır, V12 uyanır. Bir opera başlar.", specs:[["Motor","6.5L NA V12"],["Güç","700 hp"],["0–100","2.9 sn"],["Şanzıman","ISR"]], owner:"—", tags:"#Aventador #V12 #BullCulture"},
+      {title:"Chevrolet Corvette C6", tag:"V8 • RWD", img:"https://images.unsplash.com/photo-1555626905-15d994e1bdbf?q=80&w=1600&auto=format&fit=crop", story:"Amerikan kası: düşük devir torku ve tok egzoz.", specs:[["Motor","6.0L LS2 V8"],["Güç","400 hp"],["0–100","4.3 sn"],["Aktarma","RWD"]], owner:"—", tags:"#CorvetteC6 #AmericanMuscle #NAV8"}
+    ];
+
+    const grid=document.getElementById('grid');
+    const dlg=document.getElementById('dlg');
+    const big=document.getElementById('big');
+    const dTitle=document.getElementById('dTitle');
+    const dStory=document.getElementById('dStory');
+    const specsBox=document.getElementById('specs');
+    const dOwner=document.getElementById('dOwner');
+    const dTags=document.getElementById('dTags');
+
+    function card(s,i){
+      return `<article class="card">
+        <a class="thumb" data-i="${i}" style="background-image:url('${s.img}')"></a>
+        <span class="halo"></span>
+        <div class="body">
+          <div class="tag">${s.tag}</div>
+          <div class="name">${s.title}</div>
+          <div class="badges"><span class="pill">Story</span><span class="pill">Teknik bilgi</span><span class="pill">Owner</span></div>
+          <a class="open" data-i="${i}">Detayları aç</a>
+        </div>
+      </article>`
+    }
+    grid.innerHTML=spots.map(card).join('');
+
+    grid.addEventListener('click',e=>{
+      const a=e.target.closest('[data-i]');
+      if(!a) return; e.preventDefault();
+      const i=+a.dataset.i, s=spots[i];
+      big.style.backgroundImage=`url('${s.img}')`;
+      dTitle.textContent=s.title; dStory.textContent=s.story;
+      specsBox.innerHTML=s.specs.map(([k,v])=>`<div class='spec'><b>${k}</b>${v}</div>`).join('');
+      dOwner.textContent=s.owner||'—'; dTags.textContent=s.tags||'';
+      dlg.showModal();
+    });
+
+    document.getElementById('y')?.textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
